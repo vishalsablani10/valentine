@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #fce4ec;
+        }
+        #container { text-align: center; }
+        #valentineGif { width: 200px; margin-bottom: 20px; }
+        h1 { color: #d81b60; }
+        .buttons { margin-top: 20px; }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        #yesBtn { background-color: #4caf50; color: white; }
+        #noBtn { background-color: #f44336; color: white; }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <img id="valentineGif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ2p1ZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZp/mYghXLDV4s7F7KjGHL/giphy.gif" alt="cute bear">
+        <h1 id="question">Will you be my Valentine?</h1>
+        <div class="buttons">
+            <button id="yesBtn">Yes</button>
+            <button id="noBtn">No</button>
+        </div>
+    </div>
+
+    <script>
+        const phrases = [
+            "No", "Are you sure?", "Really sure?", "Last chance!", 
+            "You might regret this!", "Give it a thought!", "Don't be so cold!",
+            "Change of heart?", "Is that your final answer?", "You're breaking my heart ;("
+        ];
+
+        let count = 0;
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const gif = document.getElementById('valentineGif');
+        const question = document.getElementById('question');
+
+        noBtn.addEventListener('click', () => {
+            // Change text of No button
+            count++;
+            noBtn.innerText = phrases[Math.min(count, phrases.length - 1)];
+            
+            // Make Yes button grow
+            const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
+            yesBtn.style.fontSize = (currentSize * 1.5) + "px";
+            yesBtn.style.padding = (currentSize * 0.8) + "px " + (currentSize * 1.5) + "px";
+        });
+
+        yesBtn.addEventListener('click', () => {
+            question.innerText = "Ok yay!!!";
+            // Update to a celebratory GIF
+            gif.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ2p1ZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZp/v987654321/giphy.gif"; 
+            document.querySelector('.buttons').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
