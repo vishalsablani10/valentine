@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Wife ❤️</title>
+    <title>Vandana-Vishal ❤️</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         body {
@@ -13,24 +13,46 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
-            background-color: #fff0f3;
+            background-color: #fff0f3; /* Romantic Pink Background */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
             overflow: hidden;
         }
+
         #image-container {
             width: 300px;
             height: 300px;
             margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
+
         img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Prevents stretching */
+            object-fit: cover; /* Ensures your personal photo looks great */
             border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.5s ease;
         }
-        h1 { color: #ff4d6d; font-size: 2rem; padding: 0 20px; }
-        .btns { margin-top: 30px; display: flex; gap: 20px; align-items: center; justify-content: center; }
+
+        h1 {
+            color: #ff4d6d;
+            font-size: 2rem;
+            padding: 0 20px;
+            min-height: 3rem;
+        }
+
+        .btns {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
         button {
             padding: 15px 30px;
             font-size: 1.2rem;
@@ -38,15 +60,25 @@
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-weight: bold;
         }
-        #yesBtn { background-color: #ff4d6d; color: white; }
-        #noBtn { background-color: #adb5bd; color: white; }
+
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
+        }
+
+        #noBtn {
+            background-color: #adb5bd;
+            color: white;
+        }
     </style>
 </head>
 <body>
 
     <div id="image-container">
-        <img id="displayImage" src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Heart%20with%20Arrow.png" alt="Heart">
+        <img id="displayImage" src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Heart%20with%20Arrow.png" alt="Love Heart">
     </div>
     
     <h1 id="question">Will you be my Valentine?</h1>
@@ -63,23 +95,51 @@
         const question = document.getElementById('question');
         const buttonGroup = document.getElementById('buttonGroup');
 
-        const phrases = ["No", "Are you sure?", "Think again!", "Last chance!", "Please? :("];
+        // Phrases for the "No" button
+        const phrases = [
+            "No", 
+            "Are you sure?", 
+            "Really sure??", 
+            "Think again!", 
+            "Last chance!", 
+            "Surely not?", 
+            "You're breaking my heart!", 
+            "I'm gonna cry...", 
+            "Please? :("
+        ];
+        
         let count = 0;
 
+        // When "No" is clicked
         noBtn.addEventListener('click', () => {
             count++;
+            // Update "No" button text
             noBtn.innerText = phrases[Math.min(count, phrases.length - 1)];
+            
+            // Make "Yes" button grow significantly
             const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
             yesBtn.style.fontSize = (currentSize + 15) + "px";
             yesBtn.style.padding = (currentSize * 0.8) + "px " + (currentSize * 1.5) + "px";
         });
 
+        // When "Yes" is clicked
         yesBtn.addEventListener('click', () => {
-            question.innerText = "Yay! I love you! ❤️";
-            // Stable Kissing/Love Emoji GIF
-            image.src = "https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Kissing%20Face%20with%20Smiling%20Eyes.png"; 
+            // Update text
+            question.innerHTML = "Yay! I love you! ❤️<br><span style='font-size: 1.2rem;'>Happy Valentine's Day!</span>";
+            
+            // SHOW YOUR PERSONAL PHOTO
+            image.src = "photo.jpg"; 
+            
+            // Hide the buttons
             buttonGroup.style.display = 'none';
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+            
+            // Trigger Confetti Effect
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ff4d6d', '#ffccd5', '#ffffff']
+            });
         });
     </script>
 </body>
