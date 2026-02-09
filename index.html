@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine's Day</title>
+    <title>For My Wife ❤️</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         body {
             display: flex;
@@ -12,66 +13,88 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #fce4ec;
+            background-color: #fff0f3;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            overflow: hidden;
         }
-        #container { text-align: center; }
-        #valentineGif { width: 200px; margin-bottom: 20px; }
-        h1 { color: #d81b60; }
-        .buttons { margin-top: 20px; }
+        #image-container {
+            width: 300px;
+            height: 300px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        h1 { color: #ff4d6d; font-size: 2rem; padding: 0 20px; }
+        .btns { margin-top: 30px; display: flex; gap: 20px; align-items: center; justify-content: center; position: relative; }
         button {
-            padding: 10px 20px;
-            font-size: 16px;
-            margin: 0 10px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
             border: none;
-            border-radius: 5px;
+            border-radius: 50px;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.3s ease;
         }
-        #yesBtn { background-color: #4caf50; color: white; }
-        #noBtn { background-color: #f44336; color: white; }
+        #yesBtn { background-color: #ff4d6d; color: white; z-index: 10; }
+        #noBtn { background-color: #adb5bd; color: white; }
     </style>
 </head>
 <body>
 
-    <div id="container">
-        <img id="valentineGif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ2p1ZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZp/mYghXLDV4s7F7KjGHL/giphy.gif" alt="cute bear">
-        <h1 id="question">Will you be my Valentine?</h1>
-        <div class="buttons">
-            <button id="yesBtn">Yes</button>
-            <button id="noBtn">No</button>
-        </div>
+    <div id="image-container">
+        <img id="displayImage" src="https://cdn.pixabay.com/photo/2017/02/11/14/19/valentines-day-2057745_1280.png" alt="Love Heart">
+    </div>
+    
+    <h1 id="question">Will you be my Valentine?</h1>
+
+    <div class="btns" id="buttonGroup">
+        <button id="yesBtn">Yes</button>
+        <button id="noBtn">No</button>
     </div>
 
     <script>
-        const phrases = [
-            "No", "Are you sure?", "Really sure?", "Last chance!", 
-            "You might regret this!", "Give it a thought!", "Don't be so cold!",
-            "Change of heart?", "Is that your final answer?", "You're breaking my heart ;("
-        ];
-
-        let count = 0;
         const yesBtn = document.getElementById('yesBtn');
         const noBtn = document.getElementById('noBtn');
-        const gif = document.getElementById('valentineGif');
+        const image = document.getElementById('displayImage');
         const question = document.getElementById('question');
+        const buttonGroup = document.getElementById('buttonGroup');
+
+        const phrases = [
+            "No", "Are you sure?", "Think again!", "Last chance!", 
+            "Surely not?", "You're breaking my heart!", "I'm gonna cry...", "Please? :("
+        ];
+        
+        let count = 0;
 
         noBtn.addEventListener('click', () => {
-            // Change text of No button
             count++;
             noBtn.innerText = phrases[Math.min(count, phrases.length - 1)];
             
-            // Make Yes button grow
+            // Make "Yes" button bigger
             const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
-            yesBtn.style.fontSize = (currentSize * 1.5) + "px";
+            yesBtn.style.fontSize = (currentSize + 12) + "px";
             yesBtn.style.padding = (currentSize * 0.8) + "px " + (currentSize * 1.5) + "px";
         });
 
         yesBtn.addEventListener('click', () => {
-            question.innerText = "Ok yay!!!";
-            // Update to a celebratory GIF
-            gif.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ2p1ZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZpZzZp/v987654321/giphy.gif"; 
-            document.querySelector('.buttons').style.display = 'none';
+            question.innerText = "Yay! I love you! ❤️";
+            // Animated Couple Kissing GIF
+            image.src = "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2Zic3B1Z3Ria3BqZ3Ria3BqZ3Ria3BqZ3Ria3BqZ3Ria3BqJmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/v098pXvUuHAbm/giphy.gif"; 
+            buttonGroup.style.display = 'none';
+            
+            // Launch Confetti!
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
         });
     </script>
 </body>
