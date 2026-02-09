@@ -22,18 +22,15 @@
             width: 300px;
             height: 300px;
             margin-bottom: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
         img {
-            max-width: 100%;
-            max-height: 100%;
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Prevents stretching */
             border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
         h1 { color: #ff4d6d; font-size: 2rem; padding: 0 20px; }
-        .btns { margin-top: 30px; display: flex; gap: 20px; align-items: center; justify-content: center; position: relative; }
+        .btns { margin-top: 30px; display: flex; gap: 20px; align-items: center; justify-content: center; }
         button {
             padding: 15px 30px;
             font-size: 1.2rem;
@@ -42,14 +39,14 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        #yesBtn { background-color: #ff4d6d; color: white; z-index: 10; }
+        #yesBtn { background-color: #ff4d6d; color: white; }
         #noBtn { background-color: #adb5bd; color: white; }
     </style>
 </head>
 <body>
 
     <div id="image-container">
-        <img id="displayImage" src="https://cdn.pixabay.com/photo/2017/02/11/14/19/valentines-day-2057745_1280.png" alt="Love Heart">
+        <img id="displayImage" src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Heart%20with%20Arrow.png" alt="Heart">
     </div>
     
     <h1 id="question">Will you be my Valentine?</h1>
@@ -66,35 +63,23 @@
         const question = document.getElementById('question');
         const buttonGroup = document.getElementById('buttonGroup');
 
-        const phrases = [
-            "No", "Are you sure?", "Think again!", "Last chance!", 
-            "Surely not?", "You're breaking my heart!", "I'm gonna cry...", "Please? :("
-        ];
-        
+        const phrases = ["No", "Are you sure?", "Think again!", "Last chance!", "Please? :("];
         let count = 0;
 
         noBtn.addEventListener('click', () => {
             count++;
             noBtn.innerText = phrases[Math.min(count, phrases.length - 1)];
-            
-            // Make "Yes" button bigger
             const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
-            yesBtn.style.fontSize = (currentSize + 12) + "px";
+            yesBtn.style.fontSize = (currentSize + 15) + "px";
             yesBtn.style.padding = (currentSize * 0.8) + "px " + (currentSize * 1.5) + "px";
         });
 
         yesBtn.addEventListener('click', () => {
             question.innerText = "Yay! I love you! ❤️";
-            // Animated Couple Kissing GIF
-            image.src = "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2Zic3B1Z3Ria3BqZ3Ria3BqZ3Ria3BqZ3Ria3BqZ3Ria3BqJmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/v098pXvUuHAbm/giphy.gif"; 
+            // Stable Kissing/Love Emoji GIF
+            image.src = "https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Kissing%20Face%20with%20Smiling%20Eyes.png"; 
             buttonGroup.style.display = 'none';
-            
-            // Launch Confetti!
-            confetti({
-                particleCount: 150,
-                spread: 70,
-                origin: { y: 0.6 }
-            });
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
         });
     </script>
 </body>
